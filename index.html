@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple MVC Gallary useing JavaScript</title>
+</head>
+<body>
+
+
+<div>
+	<a id="next"  href="#">Next</a>
+
+	
+
+	<a id="prev" href="#">Prev</a>
+	<img id="img" src="">
+</div>
+
+<script type="text/javascript">
+		
+
+			var model = {
+				data: [
+				{url: 'images/meow-cat.jpg'},
+				{url: 'images/stand-cat.jpg'},
+				{url: 'images/young-cat.jpg'}
+				]
+			};
+
+
+			var Contorller = function(model){
+				this.currentIndex = 0;
+				this.model = model;
+				self = this;
+
+				this.next = function(){
+					this.currentIndex = this.currentIndex+1;
+					this.currentIndex = this.currentIndex % this.model.data.length;
+
+					self.display();
+				}
+
+				this.prev = function(){
+					this.currentIndex = this.currentIndex+1;
+					this.currentIndex = this.currentIndex % this.model.data.length;
+
+					self.display();
+				}
+
+				this.display = function () {
+					document.getElementById('img').src = this.model.data[self.currentIndex].url;
+				}
+
+				document.getElementById('next').addEventListener('click', function(event){
+					event.preventDefault();
+					self.next();
+					console.log('next');
+					
+					return false;
+				});
+
+				document.getElementById('prev').addEventListener('click', function(event){
+					event.preventDefault();
+					self.prev();
+
+					return false;
+				});
+
+				this.display();
+
+
+			}
+
+			var gallary = new Contorller(model);
+
+		
+	</script>
+
+</body>
+</html>
